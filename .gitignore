@@ -1,0 +1,8 @@
+# Bỏ qua thư mục node_modules
+node_modules/
+
+# Bỏ qua tệp package-lock.json
+package-lock.json
+
+# Bỏ qua tệp cấu hình môi trường .env
+.env
