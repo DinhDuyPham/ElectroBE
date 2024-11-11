@@ -24,14 +24,18 @@ module.exports = mongoose => {
             type: String,
         },
         avatar: {
-            type: String,
-            null: true,
+            type: String, 
+            default: "null"
         },
+        address: {
+            type: String,
+            default: "null"
+        },
+        
         socket_id: {
-            type: String,
-            null: true,
+            type: String,  
         },
-
+      
       },
       { timestamps: true }
     );
