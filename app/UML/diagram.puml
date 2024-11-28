@@ -1,0 +1,140 @@
+@startuml
+skinparam classAttributeIconSize 0
+
+class Admin {
+    - email : String
+    - hash_password : String
+    - first_name : String
+    - last_name : String
+    - phone : String
+    - age : Number
+    - gender : String
+    - avatar : String
+    - role : String
+    - socket_id : String
+    + timestamps
+}
+
+class Attribute {
+    - category_id : ObjectId
+    - name : String
+    - code_name : String
+    + timestamps
+}
+
+class AttributeValue {
+    - attribute_id : ObjectId
+    - product_id : ObjectId
+    - value : String
+    + timestamps
+}
+
+class Blog {
+    - title : String
+    - content : String
+    - author : String
+    + createdAt : Date
+    + updatedAt : Date
+    + timestamps
+}
+
+class Cart {
+    - customer_id : ObjectId
+    - total_item : Number
+    - total_price : Number
+    - total_item_active : Number
+    - total_price_active : Number
+    - is_active : Boolean
+    + timestamps
+}
+
+class CartItem {
+    - cart_id : ObjectId
+    - product_id : ObjectId
+    - product_name : String
+    - product_image : String
+    - qty : Number
+    - price : Number
+    - total_price : Number
+    - is_active : Boolean
+    + timestamps
+}
+
+class Category {
+    - name : String
+    - image : String
+    - is_active : Boolean
+    + timestamps
+}
+
+class Customer {
+    - email : String
+    - hash_password : String
+    - first_name : String
+    - last_name : String
+    - phone : String
+    - age : Number
+    - gender : String
+    - avatar : String
+    - address : String
+    - socket_id : String
+    + timestamps
+}
+
+class Order {
+    - cart_id : ObjectId
+    - customer_id : ObjectId
+    - first_name : String
+    - last_name : String
+    - phone : String
+    - email : String
+    - total_item : Number
+    - total_price : Number
+    - status : String
+    - type_order : String
+    - is_payment : Boolean
+    - city : String
+    - address : String
+    - comment : String
+    - is_active : Boolean
+    + timestamps
+}
+
+class OrderItem {
+    - order_id : ObjectId
+    - product_id : ObjectId
+    - product_name : String
+    - product_image : String
+    - qty : Number
+    - price : Number
+    - total_price : Number
+    - is_active : Boolean
+    + timestamps
+}
+
+class Product {
+    - name : String
+    - category_id : ObjectId
+    - detail : String
+    - qty : Number
+    - price : Number
+    - image : String
+    - is_active : Boolean
+    + timestamps
+}
+
+' Relationships
+Admin --> Order : "creates"
+Customer --> Order : "places"
+Cart --> Customer : "belongs to"
+CartItem --> Cart : "belongs to"
+CartItem --> Product : "includes"
+Order --> Cart : "contains"
+OrderItem --> Order : "is part of"
+OrderItem --> Product : "references"
+Attribute --> Category : "belongs to"
+AttributeValue --> Attribute : "has"
+AttributeValue --> Product : "applies to"
+Product --> Category : "belongs to"
+
+@enduml

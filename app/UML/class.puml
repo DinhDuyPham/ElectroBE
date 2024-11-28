@@ -1,0 +1,127 @@
+@startuml
+
+class Admin {
+    - email: String
+    - hash_password: String
+    - first_name: String
+    - last_name: String
+    - phone: String
+    - age: Number
+    - gender: String
+    - avatar: String
+    - role: String
+    - socket_id: String
+}
+
+class Category {
+    - name: String
+    - image: String
+    - is_active: Boolean
+}
+
+class Attribute {
+    - category_id: ObjectId
+    - name: String
+    - code_name: String
+}
+
+class AttributeValue {
+    - attribute_id: ObjectId
+    - product_id: ObjectId
+    - value: String
+}
+
+class Cart {
+    - customer_id: ObjectId
+    - total_item: Number
+    - total_price: Number
+    - total_item_active: Number
+    - total_price_active: Number
+    - is_active: Boolean
+}
+
+class CartItem {
+    - cart_id: ObjectId
+    - product_id: ObjectId
+    - product_name: String
+    - product_image: String
+    - qty: Number
+    - price: Number
+    - total_price: Number
+    - is_active: Boolean
+}
+
+class Customer {
+    - email: String
+    - hash_password: String
+    - first_name: String
+    - last_name: String
+    - phone: String
+    - age: Number
+    - gender: String
+    - avatar: String
+    - address: String
+    - socket_id: String
+}
+
+class Order {
+    - cart_id: ObjectId
+    - customer_id: ObjectId
+    - first_name: String
+    - last_name: String
+    - phone: String
+    - email: String
+    - total_item: Number
+    - total_price: Number
+    - status: String
+    - type_order: String
+    - is_payment: Boolean
+    - city: String
+    - address: String
+    - comment: String
+    - is_active: Boolean
+}
+
+class OrderItem {
+    - order_id: ObjectId
+    - product_id: ObjectId
+    - product_name: String
+    - product_image: String
+    - qty: Number
+    - price: Number
+    - total_price: Number
+    - is_active: Boolean
+}
+
+class Product {
+    - name: String
+    - category_id: ObjectId
+    - detail: String
+    - qty: Number
+    - price: Number
+    - image: String
+    - is_active: Boolean
+}
+
+class Blog {
+    - title: String
+    - content: String
+    - author: String
+    - createdAt: Date
+    - updatedAt: Date
+}
+
+Admin "1" -- "0..*" Category : manages >
+Admin "1" -- "0..*" Product : manages >
+Product "0..*" -- "1" Category : belongs to >
+Product "0..*" -- "0..*" AttributeValue : has >
+Attribute "1" -- "0..*" AttributeValue : defines >
+Cart "0..*" -- "1" Customer : belongs to >
+Cart "1" -- "0..*" CartItem : contains >
+CartItem "1" -- "1" Product : contains >
+Order "0..*" -- "1" Cart : has >
+Order "1" -- "0..*" OrderItem : contains >
+OrderItem "1" -- "1" Product : contains >
+Blog "1" -- "0..*" Admin : written by >
+
+@enduml
