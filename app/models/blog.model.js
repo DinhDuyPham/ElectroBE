@@ -1,7 +1,6 @@
-const mongoose = require("mongoose");
-
-const blogSchema = mongoose.Schema(
-  {
+module.exports = mongoose => {
+  const blogSchema = new mongoose.Schema(
+    {
     title: {
       type: String,
       required: true,
@@ -17,19 +16,24 @@ const blogSchema = mongoose.Schema(
     image: {
       type: String,
     },
-    createdAt: {
-      type: Date,
-      default: Date.now,
-    },
-    updatedAt: {
-      type: Date,
-      default: Date.now,
-    },
+    
+
   },
-  { timestamps: true } // Mongoose tự động thêm các trường `createdAt` và `updatedAt`
+  {
+      timestamps: true, 
+      toJSON: {
+        transform: (doc, ret) => {
+          ret.id = ret._id;
+          delete ret._id;
+          delete ret.__v;
+        },
+      },
+    }
+
+   
 );
 
-// Tạo model từ schema
-const Blog = mongoose.model("Blog", blogSchema);
+  const Blog = mongoose.model('blog', blogSchema );
 
-module.exports = Blog;
+  return Blog;
+};

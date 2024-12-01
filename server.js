@@ -44,6 +44,7 @@ require("./app/routes/cart.routes")(app);
 require("./app/routes/order.routes")(app);
 require("./app/routes/paymnet.routes")(app);
 require("./app/routes/revenue.routes")(app);
+require("./app/routes/blog.routes")(app);
 
 const socket = require("./app/socket");
 
